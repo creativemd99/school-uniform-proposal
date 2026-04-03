@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Uniform Clothing App — Proposal & Feasibility Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E45;
+    --navy-light: #243D58;
+    --gold: #C8960C;
+    --gold-light: #F0B429;
+    --gold-pale: #FFF3CD;
+    --slate: #5C6E84;
+    --slate-light: #8A9BAD;
+    --cream: #F8F6F1;
+    --white: #FFFFFF;
+    --success: #1A7F5A;
+    --success-bg: #E6F5EE;
+    --danger: #B91C1C;
+    --danger-bg: #FEE2E2;
+    --amber: #D97706;
+    --amber-bg: #FEF3C7;
+    --blue: #1D4ED8;
+    --blue-bg: #EFF6FF;
+    --border: #D8DADE;
+    --text-main: #0D1B2A;
+    --text-muted: #5C6E84;
+    --text-light: #8A9BAD;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-main);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 80px;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border: 1px solid rgba(200,150,12,0.15);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border: 1px solid rgba(200,150,12,0.1);
+    border-radius: 50%;
+  }
+
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,150,12,0.15);
+    border: 1px solid rgba(200,150,12,0.4);
+    color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 60px;
+  }
+
+  .cover-eyebrow {
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 54px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    max-width: 700px;
+  }
+
+  .cover-title span { color: var(--gold-light); }
+
+  .cover-subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    max-width: 580px;
+    margin-bottom: 60px;
+    line-height: 1.7;
+  }
+
+  .cover-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 48px;
+  }
+
+  .cover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 80px;
+  }
+
+  .cover-tag {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 400;
+  }
+
+  .cover-meta {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 32px;
+  }
+
+  .cover-meta-item label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate-light);
+    margin-bottom: 4px;
+  }
+
+  .cover-meta-item span {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  .cover-version {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+
+  /* MAIN CONTENT */
+  .document {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .section { padding: 72px 0 0; }
+
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .section-lead {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin-bottom: 40px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 48px 0;
+  }
+
+  /* EXEC SUMMARY */
+  .exec-summary {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 48px 56px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exec-summary::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    color: rgba(200,150,12,0.08);
+    line-height: 1;
+  }
+
+  .exec-summary p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.85;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .exec-summary p + p { margin-top: 20px; }
+
+  /* STAT CARDS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .stat-card .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-card .stat-value span { color: var(--gold); }
+  .stat-card .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* USER JOURNEY FLOW */
+  .journey-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 32px 0;
+  }
+
+  .journey-step {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .journey-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 48px;
+    bottom: -16px;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .journey-connector { height: 32px; }
+
+  .step-dot {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .step-body {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    flex: 1;
+    margin-bottom: 16px;
+  }
+
+  .step-body h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .step-body p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .step-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .step-chip {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--navy);
+    padding: 3px 12px;
+  }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .feature-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+  }
+
+  .feature-block-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .feature-block h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .feature-block p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .feature-block ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  .feature-block ul li {
+    font-size: 13px;
+    color: var(--text-main);
+    padding: 4px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .feature-block ul li::before {
+    content: '·';
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+
+  /* SIZING TABLE */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .info-table thead th {
+    background: var(--navy);
+    color: var(--white);
+    text-align: left;
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .info-table tbody tr { border-bottom: 1px solid var(--border); }
+  .info-table tbody tr:last-child { border-bottom: none; }
+  .info-table tbody tr:hover { background: var(--cream); }
+
+  .info-table td {
+    padding: 13px 20px;
+    vertical-align: top;
+    color: var(--text-main);
+    line-height: 1.55;
+  }
+
+  .info-table td:first-child {
+    font-weight: 600;
+    color: var(--navy);
+    width: 28%;
+  }
+
+  /* BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .badge-success { background: var(--success-bg); color: var(--success); }
+  .badge-warning { background: var(--amber-bg); color: var(--amber); }
+  .badge-danger  { background: var(--danger-bg); color: var(--danger); }
+  .badge-info    { background: var(--blue-bg); color: var(--blue); }
+  .badge-gold    { background: var(--gold-pale); color: var(--gold); }
+
+  /* TIMELINE */
+  .timeline { position: relative; margin: 32px 0; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .timeline-dot {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .timeline-content {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 28px;
+    flex: 1;
+  }
+
+  .timeline-content .phase-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .timeline-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .timeline-content p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .timeline-deliverables { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .deliverable-tag {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--navy);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+  }
+
+  /* PRICING CARD */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .pricing-card-header {
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-card-header .price-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .pricing-card-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .pricing-card-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .pricing-card-body {
+    padding: 18px 22px;
+  }
+
+  .pricing-card-body ul { list-style: none; }
+
+  .pricing-card-body ul li {
+    font-size: 13px;
+    color: var(--text-main);
+    padding: 6px 0;
+    border-bottom: 1px solid #F0F0F0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .pricing-card-body ul li:last-child { border-bottom: none; }
+
+  .pricing-card-body ul li::before {
+    content: '→';
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* DELIVERY SECTION */
+  .delivery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .delivery-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .delivery-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .delivery-card-header .deli-icon { font-size: 24px; margin-right: 12px; }
+
+  .delivery-card-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .delivery-card-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .delivery-card-body {
+    padding: 20px 24px;
+  }
+
+  .delivery-card-body ul { list-style: none; }
+
+  .delivery-card-body ul li {
+    font-size: 13.5px;
+    color: var(--text-main);
+    padding: 7px 0;
+    border-bottom: 1px solid #F5F5F5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .delivery-card-body ul li:last-child { border-bottom: none; }
+
+  .delivery-card-body ul li::before {
+    content: '·';
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  /* ARCH LAYERS */
+  .arch-flow {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    margin: 32px 0;
+  }
+
+  .arch-layer {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+
+  .arch-layer:last-child { margin-bottom: 0; }
+
+  .arch-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--slate-light);
+    margin-bottom: 8px;
+  }
+
+  .arch-layer-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .arch-layer-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .arch-chip {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-main);
+    padding: 4px 12px;
+  }
+
+  .arch-arrow {
+    text-align: center;
+    color: var(--gold);
+    font-size: 20px;
+    padding: 4px 0;
+    line-height: 1;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    border-left: 4px solid var(--gold);
+    background: var(--gold-pale);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .highlight-box p {
+    font-size: 14.5px;
+    color: var(--navy);
+    line-height: 1.7;
+  }
+
+  /* RISK */
+  .risk-grid { display: grid; gap: 12px; margin: 28px 0; }
+
+  .risk-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .risk-item h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .risk-item p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .risk-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .risk-level label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* FEASIBILITY */
+  .feasibility-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .feasibility-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .feasibility-card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .feasibility-card-header h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .feasibility-card-body {
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* NEXT STEPS */
+  .doc-footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .doc-footer strong { color: var(--navy); }
+
+  h2.sub-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 36px 0 12px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  p.body-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  /* SIZE MATRIX */
+  .size-matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+
+  .size-matrix thead th {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .size-matrix thead th:first-child { text-align: left; }
+
+  .size-matrix tbody tr { border-bottom: 1px solid var(--border); }
+  .size-matrix tbody tr:last-child { border-bottom: none; }
+  .size-matrix tbody tr:nth-child(even) { background: var(--cream); }
+
+  .size-matrix td {
+    padding: 11px 16px;
+    text-align: center;
+    color: var(--text-main);
+  }
+
+  .size-matrix td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  @media print {
+    .cover { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ COVER PAGE -->
+<div class="cover">
+  <div class="cover-badge">Confidential · Client Proposal</div>
+
+  <div class="cover-eyebrow">Technical Proposal & Feasibility Report</div>
+
+  <div class="cover-title">School Uniform <span>Clothing App</span></div>
+
+  <div class="cover-subtitle">
+    A smart, school-specific uniform ordering platform with grade-level filtering, gender-based catalogues, precise size measurement inputs, dynamic pricing, and flexible delivery options including urgent dispatch.
+  </div>
+
+  <div class="cover-divider"></div>
+
+  <div class="cover-tags">
+    <span class="cover-tag">🏫 School Selection</span>
+    <span class="cover-tag">📚 Grade Level Filter</span>
+    <span class="cover-tag">👕 Gender-Based Catalogue</span>
+    <span class="cover-tag">📏 Smart Sizing</span>
+    <span class="cover-tag">💰 Dynamic Pricing</span>
+    <span class="cover-tag">🚚 Delivery Management</span>
+    <span class="cover-tag">⚡ Urgent Order Support</span>
+  </div>
+
+  <div class="cover-meta">
+    <div style="display:flex;gap:48px;">
+      <div class="cover-meta-item">
+        <label>Prepared For</label>
+        <span>Clothing Retail Client</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Date</label>
+        <span>April 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <label>Document Type</label>
+        <span>Proposal v1.0</span>
+      </div>
+    </div>
+    <div class="cover-version">PROPOSAL · REQ-002</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ DOCUMENT BODY -->
+<div class="document">
+
+  <!-- ── 01 EXECUTIVE SUMMARY -->
+  <div class="section">
+    <div class="section-number">01 · Overview</div>
+    <h1 class="section-title">Executive Summary</h1>
+    <p class="section-lead">A concise overview of the proposed school uniform ordering application and the problem it solves for parents, schools, and uniform retailers.</p>
+
+    <div class="exec-summary">
+      <p>This proposal outlines the development of a <strong style="color:var(--gold-light)">School Uniform Clothing App</strong> — a purpose-built mobile and web platform that allows parents and students to order school uniforms with precision, speed, and convenience. The app eliminates the friction of in-store uniform shopping by enabling parents to select their child's school, grade, and gender, then configure exact sizing parameters (height, chest width, waist, and other measurements) to receive perfectly fitted uniforms delivered to their door.</p>
+      <p>The platform features a <strong style="color:var(--gold-light)">dynamic pricing engine</strong> that adjusts prices based on garment type, size category, and measurement complexity. A flexible delivery module supports both standard delivery (7–10 business days) and an urgent express option with transparent additional charges — giving families the flexibility to plan ahead or respond to last-minute needs.</p>
+      <p>The solution serves <strong style="color:var(--gold-light)">three audiences</strong>: parents ordering uniforms for their children, school administrators managing approved uniform catalogues, and shop owners/admins managing inventory, orders, and deliveries from a central dashboard.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value"><span>~</span>4</div>
+        <div class="stat-label">Months to MVP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3<span>+</span></div>
+        <div class="stat-label">User Roles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7<span>–10</span></div>
+        <div class="stat-label">Day Delivery</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">Schools Scalable</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 02 USER JOURNEY -->
+  <div class="section">
+    <div class="section-number">02 · User Flow</div>
+    <h1 class="section-title">Customer Ordering Journey</h1>
+    <p class="section-lead">The end-to-end ordering experience — from opening the app to receiving uniforms at the doorstep. Each step is designed for clarity and minimal friction.</p>
+
+    <div class="journey-flow">
+
+      <div class="journey-step">
+        <div class="step-dot">🏫</div>
+        <div class="step-body">
+          <h3>Step 1 — Select School</h3>
+          <p>Parent opens the app and searches for or selects their child's school from a curated, searchable directory. Schools are verified and pre-approved by admins.</p>
+          <div class="step-chips">
+            <span class="step-chip">Search by name / city</span>
+            <span class="step-chip">Browse by area</span>
+            <span class="step-chip">Recently ordered</span>
+            <span class="step-chip">School logo displayed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-dot">📚</div>
+        <div class="step-body">
+          <h3>Step 2 — Choose Grade Level</h3>
+          <p>After selecting the school, the parent selects the grade or class (e.g., Grade 1, Grade 5, Class 10). The catalogue automatically filters to only show uniforms applicable for that grade.</p>
+          <div class="step-chips">
+            <span class="step-chip">Nursery – Grade 12</span>
+            <span class="step-chip">Grade-specific items shown</span>
+            <span class="step-chip">Optional class section</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-dot">👤</div>
+        <div class="step-body">
+          <h3>Step 3 — Select Gender</h3>
+          <p>The parent selects the child's gender (Boy / Girl / Unisex). The catalogue further filters to gender-appropriate uniform items — shirt styles, skirts vs. trousers, ties, etc.</p>
+          <div class="step-chips">
+            <span class="step-chip">Boy</span>
+            <span class="step-chip">Girl</span>
+            <span class="step-chip">Unisex</span>
+            <span class="step-chip">Gender-specific pricing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-dot">📏</div>
+        <div class="step-body">
+          <h3>Step 4 — Enter Measurements & Size</h3>
+          <p>Parent inputs the child's measurements for each garment. The app provides a visual measurement guide to help parents measure accurately at home. Standard size labels (XS–XXL) are also offered as an alternative.</p>
+          <div class="step-chips">
+            <span class="step-chip">Height (cm)</span>
+            <span class="step-chip">Chest / width (cm)</span>
+            <span class="step-chip">Waist (cm)</span>
+            <span class="step-chip">Inseam (cm)</span>
+            <span class="step-chip">Standard size option</span>
+            <span class="step-chip">Size guide PDF</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-dot">💰</div>
+        <div class="step-body">
+          <h3>Step 5 — Dynamic Pricing & Cart</h3>
+          <p>Prices are calculated automatically based on garment type, size, and measurement complexity (custom-fit vs. standard). The cart shows a live itemised breakdown before checkout.</p>
+          <div class="step-chips">
+            <span class="step-chip">Size-based price tiers</span>
+            <span class="step-chip">Custom-fit surcharge</span>
+            <span class="step-chip">Quantity discounts</span>
+            <span class="step-chip">Live total update</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-dot">🚚</div>
+        <div class="step-body">
+          <h3>Step 6 — Select Delivery Option</h3>
+          <p>Parent selects from two delivery modes. Standard delivery (7–10 business days, included in base price) or Urgent Express delivery (2–3 business days, with a transparent additional charge shown upfront).</p>
+          <div class="step-chips">
+            <span class="step-chip">Standard: 7–10 days</span>
+            <span class="step-chip">Urgent: 2–3 days + extra charge</span>
+            <span class="step-chip">Estimated delivery date shown</span>
+            <span class="step-chip">Pincode-based serviceability</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-dot">✅</div>
+        <div class="step-body">
+          <h3>Step 7 — Payment & Order Confirmation</h3>
+          <p>Parent completes payment via UPI, card, or net banking. An order confirmation with estimated delivery date is sent via SMS, email, and in-app notification.</p>
+          <div class="step-chips">
+            <span class="step-chip">UPI / Cards / Net Banking</span>
+            <span class="step-chip">Order ID generated</span>
+            <span class="step-chip">SMS + Email confirmation</span>
+            <span class="step-chip">Live order tracking</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 03 CORE FEATURES -->
+  <div class="section">
+    <div class="section-number">03 · Features</div>
+    <h1 class="section-title">Core Feature Modules</h1>
+    <p class="section-lead">The platform is broken into four modules — the customer-facing app, the sizing engine, the pricing engine, and the admin/operations panel.</p>
+
+    <h2 class="sub-heading">Module A — School & Catalogue Management</h2>
+    <div class="feature-grid">
+      <div class="feature-block">
+        <div class="feature-block-icon">🏫</div>
+        <h3>School Directory</h3>
+        <p>A verified, searchable database of schools. Each school has its own uniform catalogue, approved colour codes, badge/emblem images, and grade-level configuration.</p>
+        <ul>
+          <li>Search by school name, city, or board (CBSE / ICSE / State)</li>
+          <li>Admin-verified school listings to prevent catalogue errors</li>
+          <li>School logo, address, and contact displayed</li>
+          <li>Multiple branches of the same school supported</li>
+          <li>Schools can be onboarded via a self-registration request</li>
+        </ul>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-icon">👕</div>
+        <h3>Grade & Gender Catalogue</h3>
+        <p>Each school's catalogue is filtered by grade and gender to show only relevant uniform items. Parents never see irrelevant garments for the wrong class or gender.</p>
+        <ul>
+          <li>Grade-wise item sets (e.g., tie added from Grade 6)</li>
+          <li>Boy / Girl / Unisex item segregation</li>
+          <li>Item photos, fabric descriptions, care instructions</li>
+          <li>Mandatory vs. optional item tagging</li>
+          <li>Seasonal variants (summer / winter uniforms)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="sub-heading">Module B — Sizing Engine</h2>
+
+    <div class="feature-grid">
+      <div class="feature-block">
+        <div class="feature-block-icon">📏</div>
+        <h3>Measurement Input System</h3>
+        <p>An intuitive measurement input interface with visual guides. Parents can input custom measurements or select from standard size charts. The system recommends the nearest standard size as a convenience.</p>
+        <ul>
+          <li>Height, chest/width, waist, hip, inseam, shoulder width</li>
+          <li>Illustrated "how to measure" guide per garment</li>
+          <li>Standard size chart (Age-based: 2Y–16Y and XS–3XL)</li>
+          <li>Saved child profiles — re-use measurements for siblings</li>
+          <li>Measurement notes field for special alterations</li>
+        </ul>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-icon">📐</div>
+        <h3>Smart Size Recommendation</h3>
+        <p>The system suggests the best-fit standard size based on entered measurements and flags if measurements fall between sizes, recommending the larger size or custom-fit option.</p>
+        <ul>
+          <li>AI-assisted size suggestion from measurement inputs</li>
+          <li>Between-size alerts with recommendation logic</li>
+          <li>Custom-fit flag for out-of-standard measurements</li>
+          <li>Size saved to profile for repeat orders</li>
+          <li>Age-to-size mapping for quick entry</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="sub-heading">Size Reference Matrix</h2>
+    <p class="body-text" style="margin-bottom:12px;">A representative sizing chart as used within the app's size recommendation engine:</p>
+
+    <table class="size-matrix">
+      <thead>
+        <tr>
+          <th>Size Label</th>
+          <th>Age (Years)</th>
+          <th>Height (cm)</th>
+          <th>Chest (cm)</th>
+          <th>Waist (cm)</th>
+          <th>Fits Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>XS / 4Y</td>
+          <td>3–5</td>
+          <td>95–110</td>
+          <td>52–56</td>
+          <td>48–52</td>
+          <td>Nursery – KG</td>
+        </tr>
+        <tr>
+          <td>S / 6Y</td>
+          <td>5–7</td>
+          <td>110–120</td>
+          <td>57–62</td>
+          <td>53–58</td>
+          <td>Grade 1–2</td>
+        </tr>
+        <tr>
+          <td>M / 8Y</td>
+          <td>7–9</td>
+          <td>120–132</td>
+          <td>63–68</td>
+          <td>58–63</td>
+          <td>Grade 3–4</td>
+        </tr>
+        <tr>
+          <td>L / 10Y</td>
+          <td>9–11</td>
+          <td>132–142</td>
+          <td>68–74</td>
+          <td>63–68</td>
+          <td>Grade 5–6</td>
+        </tr>
+        <tr>
+          <td>XL / 12Y</td>
+          <td>11–13</td>
+          <td>142–152</td>
+          <td>74–80</td>
+          <td>68–74</td>
+          <td>Grade 7–8</td>
+        </tr>
+        <tr>
+          <td>XXL / 14Y</td>
+          <td>13–15</td>
+          <td>152–162</td>
+          <td>80–88</td>
+          <td>74–80</td>
+          <td>Grade 9–10</td>
+        </tr>
+        <tr>
+          <td>Custom Fit</td>
+          <td>Any</td>
+          <td>Any</td>
+          <td>Any</td>
+          <td>Any</td>
+          <td>All Grades</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub-heading">Module C — Dynamic Pricing Engine</h2>
+    <div class="feature-grid">
+      <div class="feature-block">
+        <div class="feature-block-icon">💰</div>
+        <h3>Size-Based Pricing Tiers</h3>
+        <p>Prices are automatically calculated based on garment type, standard size category, and whether custom measurements are specified — with full price transparency shown to the customer before checkout.</p>
+        <ul>
+          <li>Base price per garment defined by admin</li>
+          <li>Size multiplier applied (XS–XL = base price, XXL+ = surcharge)</li>
+          <li>Custom-fit surcharge (flat fee per garment)</li>
+          <li>Bundle pricing for full uniform sets</li>
+          <li>School-specific pricing overrides by admin</li>
+        </ul>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-icon">🏷️</div>
+        <h3>Pricing Rules & Discounts</h3>
+        <p>A flexible admin-configurable pricing rule engine that supports promotions, school-specific discounts, quantity breaks, and seasonal offers.</p>
+        <ul>
+          <li>Bulk discount: buy 3+ of same item, get a percentage off</li>
+          <li>School tie-up discount codes</li>
+          <li>Academic season pricing (June/July back-to-school campaigns)</li>
+          <li>Coupon code support at checkout</li>
+          <li>First-order discount for new customers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Pricing Example:</strong> A Grade 5 boy's full uniform set (shirt × 2, trousers × 2, tie × 1, belt × 1) in standard size L: base price ₹1,200. Same set in custom-fit measurements: base ₹1,200 + custom surcharge ₹150/garment × 4 garments = ₹1,800 total. Prices and surcharges are fully configurable by the admin.</p>
+    </div>
+
+    <h2 class="sub-heading">Module D — Delivery Management</h2>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 04 DELIVERY -->
+  <div class="section">
+    <div class="section-number">04 · Delivery</div>
+    <h1 class="section-title">Delivery Options & Logistics</h1>
+    <p class="section-lead">The delivery module supports two clearly defined service tiers, with all timelines and charges shown transparently to customers before payment.</p>
+
+    <div class="delivery-grid">
+      <div class="delivery-card">
+        <div class="delivery-card-header">
+          <div style="display:flex;align-items:center;">
+            <span class="deli-icon">📦</span>
+            <div>
+              <h3>Standard Delivery</h3>
+              <p>Recommended for planned orders</p>
+            </div>
+          </div>
+          <span class="badge badge-success">Included</span>
+        </div>
+        <div class="delivery-card-body">
+          <ul>
+            <li>Estimated delivery: 7–10 business days from order confirmation</li>
+            <li>Delivery cost included in base order price (no extra charge)</li>
+            <li>Allows time for custom-fit garment stitching and quality check</li>
+            <li>Tracking updates via SMS and in-app at each stage (confirmed → stitching → dispatched → out for delivery → delivered)</li>
+            <li>Available for all pincodes in serviceable zones</li>
+            <li>Delivery date shown at checkout before payment</li>
+            <li>Rescheduling allowed once via app before dispatch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="delivery-card">
+        <div class="delivery-card-header">
+          <div style="display:flex;align-items:center;">
+            <span class="deli-icon">⚡</span>
+            <div>
+              <h3>Urgent Express Delivery</h3>
+              <p>For last-minute requirements</p>
+            </div>
+          </div>
+          <span class="badge badge-warning">Extra Charges Apply</span>
+        </div>
+        <div class="delivery-card-body">
+          <ul>
+            <li>Estimated delivery: 2–3 business days (stock items only) or 4–5 days for custom-fit urgent orders</li>
+            <li>Urgent delivery surcharge shown transparently at checkout before payment</li>
+            <li>Surcharge is configurable by admin (e.g., ₹150–₹400 flat or percentage)</li>
+            <li>Priority processing — order moves to head of production queue</li>
+            <li>Only available for items currently in stock or near-ready; custom complex alterations may not qualify</li>
+            <li>Live tracking with more frequent status updates (every stage notified)</li>
+            <li>Cutoff time: orders placed before 12 PM qualify for same-day processing start</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Delivery Feature</th>
+          <th>Standard (7–10 Days)</th>
+          <th>Urgent Express (2–5 Days)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Extra Charge</td>
+          <td>None (included in order)</td>
+          <td>Configurable flat fee or % surcharge</td>
+        </tr>
+        <tr>
+          <td>Custom-Fit Orders</td>
+          <td>Fully supported</td>
+          <td>Supported with 4–5 day timeline</td>
+        </tr>
+        <tr>
+          <td>Order Cut-off</td>
+          <td>Any time</td>
+          <td>Before 12:00 PM for same-day start</td>
+        </tr>
+        <tr>
+          <td>Tracking</td>
+          <td>Major milestones via SMS/app</td>
+          <td>Every stage, more frequent alerts</td>
+        </tr>
+        <tr>
+          <td>Cancellation</td>
+          <td>Before dispatch (free)</td>
+          <td>Before processing start only</td>
+        </tr>
+        <tr>
+          <td>Estimated Date Shown</td>
+          <td>Yes, at checkout</td>
+          <td>Yes, at checkout</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <p><strong>Pincode Serviceability:</strong> Standard delivery will support all locations through third-party courier partners (Delhivery, Shiprocket, India Post). Urgent express delivery may be restricted to pincodes within the same city or region as the fulfillment center. The app will show serviceability and estimated date dynamically after the customer enters their delivery pincode.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 05 ADMIN PANEL -->
+  <div class="section">
+    <div class="section-number">05 · Admin Panel</div>
+    <h1 class="section-title">Shop Owner & Admin Dashboard</h1>
+    <p class="section-lead">A comprehensive web-based admin panel for managing schools, catalogues, orders, inventory, pricing rules, and delivery operations from a single interface.</p>
+
+    <div class="feature-grid">
+      <div class="feature-block">
+        <div class="feature-block-icon">🏫</div>
+        <h3>School & Catalogue Management</h3>
+        <p>Add and manage schools, configure grade-level uniform sets, upload garment photos, set colour codes per school, and manage seasonal catalogue updates.</p>
+        <ul>
+          <li>Add / edit / deactivate schools and branches</li>
+          <li>Configure uniform sets per grade and gender</li>
+          <li>Bulk upload garment images and descriptions</li>
+          <li>Mark items as mandatory or optional per grade</li>
+        </ul>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-icon">📦</div>
+        <h3>Order Management</h3>
+        <p>Full order lifecycle management — from new order receipt through production, dispatch, and delivery confirmation. Filter by school, status, or delivery type.</p>
+        <ul>
+          <li>New / In-Production / Dispatched / Delivered pipeline</li>
+          <li>Urgent orders flagged and prioritised at top</li>
+          <li>Print order sheets with full measurement details</li>
+          <li>Bulk status updates and dispatch batch processing</li>
+        </ul>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-icon">💲</div>
+        <h3>Pricing Rule Configuration</h3>
+        <p>A flexible pricing engine admin interface — set base prices, size surcharges, custom-fit fees, urgent delivery charges, discount codes, and bulk pricing rules without developer involvement.</p>
+        <ul>
+          <li>Per-garment base price setup</li>
+          <li>Size tier surcharge configuration</li>
+          <li>Custom-fit fee per garment or as a % of base</li>
+          <li>Urgent delivery surcharge (flat or percentage)</li>
+        </ul>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-icon">📊</div>
+        <h3>Reports & Analytics</h3>
+        <p>Sales reports by school, grade, season, and delivery type. Inventory demand forecasting based on historical orders to plan stock for peak school admission periods.</p>
+        <ul>
+          <li>Daily / weekly / monthly order volume charts</li>
+          <li>Revenue by school and garment category</li>
+          <li>Most ordered sizes per school — demand planning</li>
+          <li>Pending orders aging report</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 06 ARCHITECTURE -->
+  <div class="section">
+    <div class="section-number">06 · Architecture</div>
+    <h1 class="section-title">Technical Architecture</h1>
+    <p class="section-lead">A clean, scalable architecture supporting the customer app (iOS + Android), the admin web panel, and the backend API — all connected through a secure cloud layer.</p>
+
+    <div class="arch-flow">
+      <div class="arch-layer" style="background:#0D1B2A;border-color:#1A2E45;">
+        <div class="arch-layer-label" style="color:rgba(200,150,12,0.8);">Layer 4 — Presentation</div>
+        <div class="arch-layer-title" style="color:white;">User Interfaces</div>
+        <div class="arch-layer-items">
+          <span class="arch-chip">Customer App — React Native (iOS + Android)</span>
+          <span class="arch-chip">Admin Web Panel — React.js</span>
+          <span class="arch-chip">Order Tracking PWA</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow">↕</div>
+
+      <div class="arch-layer" style="background:#1A2E45;border-color:#243D58;">
+        <div class="arch-layer-label" style="color:rgba(200,150,12,0.7);">Layer 3 — API Gateway</div>
+        <div class="arch-layer-title" style="color:white;">Secure REST API + WebSocket</div>
+        <div class="arch-layer-items">
+          <span class="arch-chip">JWT Authentication</span>
+          <span class="arch-chip">Role-Based Access (Customer / Admin / Delivery)</span>
+          <span class="arch-chip">SSL/TLS Encryption</span>
+          <span class="arch-chip">Rate Limiting</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow">↕</div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label">Layer 2 — Business Logic</div>
+        <div class="arch-layer-title">Core Application Server (Node.js / Python FastAPI)</div>
+        <div class="arch-layer-items">
+          <span class="arch-chip">School & Catalogue Service</span>
+          <span class="arch-chip">Sizing & Recommendation Engine</span>
+          <span class="arch-chip">Dynamic Pricing Calculator</span>
+          <span class="arch-chip">Order Management Engine</span>
+          <span class="arch-chip">Delivery Routing Service</span>
+          <span class="arch-chip">Notification Dispatcher</span>
+          <span class="arch-chip">Payment Webhook Handler</span>
+        </div>
+      </div>
+
+      <div class="arch-arrow">↕</div>
+
+      <div class="arch-layer">
+        <div class="arch-layer-label">Layer 1 — Data & Integrations</div>
+        <div class="arch-layer-title">Databases, Storage & Third-Party Services</div>
+        <div class="arch-layer-items">
+          <span class="arch-chip">PostgreSQL (orders, users, catalogue)</span>
+          <span class="arch-chip">Redis (cache, sessions)</span>
+          <span class="arch-chip">S3 / Cloudflare R2 (product images)</span>
+          <span class="arch-chip">Razorpay / PayU (payments)</span>
+          <span class="arch-chip">Shiprocket / Delhivery API (courier)</span>
+          <span class="arch-chip">Firebase FCM (push notifications)</span>
+          <span class="arch-chip">SMS Gateway (MSG91 / Twilio)</span>
+          <span class="arch-chip">WhatsApp Business API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 07 FEASIBILITY -->
+  <div class="section">
+    <div class="section-number">07 · Feasibility</div>
+    <h1 class="section-title">Feasibility Analysis</h1>
+    <p class="section-lead">Assessment of technical, operational, market, and scalability feasibility to confirm the project is achievable within realistic constraints.</p>
+
+    <div class="feasibility-grid">
+      <div class="feasibility-card">
+        <div class="feasibility-card-header">
+          <h4>⚙️ Technical Feasibility</h4>
+          <span class="badge badge-success">High</span>
+        </div>
+        <div class="feasibility-card-body">
+          All components use well-established, production-proven technologies. React Native is widely used for e-commerce mobile apps. The pricing and sizing engine requires straightforward rule-based logic — no AI/ML complexity is required for the core system. Third-party APIs for payments (Razorpay) and couriers (Shiprocket) are mature, well-documented, and widely adopted by Indian e-commerce platforms.
+        </div>
+      </div>
+
+      <div class="feasibility-card">
+        <div class="feasibility-card-header">
+          <h4>🏪 Operational Feasibility</h4>
+          <span class="badge badge-success">High</span>
+        </div>
+        <div class="feasibility-card-body">
+          Shop staff need minimal training — the admin panel is purpose-built for non-technical operators. Onboarding a new school requires entering its details and uploading catalogue items, which takes 20–30 minutes per school. Order processing is streamlined through the pipeline view. Measurement-based orders come with printed order sheets that include all dimensions clearly, minimising stitching errors.
+        </div>
+      </div>
+
+      <div class="feasibility-card">
+        <div class="feasibility-card-header">
+          <h4>📈 Market Feasibility</h4>
+          <span class="badge badge-success">Strong Demand</span>
+        </div>
+        <div class="feasibility-card-body">
+          School uniform procurement is an annual pain point for millions of Indian families — long queues, wrong sizes, and limited availability in smaller cities. A well-designed digital ordering platform with home delivery directly addresses this gap. Peak demand in May–July (school admissions season) creates a predictable revenue cycle, while repeat orders each year from the same families ensure a loyal returning customer base.
+        </div>
+      </div>
+
+      <div class="feasibility-card">
+        <div class="feasibility-card-header">
+          <h4>📐 Sizing Accuracy Feasibility</h4>
+          <span class="badge badge-warning">Managed Risk</span>
+        </div>
+        <div class="feasibility-card-body">
+          Self-measured inputs can introduce errors if parents measure incorrectly. This is mitigated through visual measurement guides inside the app, standardised measurement video tutorials, and a clear returns/alteration policy for size issues. Recommending standard sizes alongside custom measurements reduces the number of fully custom orders, lowering the risk of fit errors.
+        </div>
+      </div>
+
+      <div class="feasibility-card">
+        <div class="feasibility-card-header">
+          <h4>🚀 Scalability Feasibility</h4>
+          <span class="badge badge-success">Very High</span>
+        </div>
+        <div class="feasibility-card-body">
+          The cloud-native architecture scales horizontally. Adding a new school takes minutes via the admin panel. The platform can serve a single retailer or be white-labeled for multiple uniform shop franchises. During peak admission season (May–July), auto-scaling cloud infrastructure ensures performance is maintained under high order volumes without manual intervention.
+        </div>
+      </div>
+
+      <div class="feasibility-card">
+        <div class="feasibility-card-header">
+          <h4>⚖️ Legal & Compliance Feasibility</h4>
+          <span class="badge badge-success">Straightforward</span>
+        </div>
+        <div class="feasibility-card-body">
+          This is a standard e-commerce application. Required compliance includes a Privacy Policy (for user data under India's DPDP Act 2023), Terms & Conditions, and Razorpay / payment gateway merchant agreement. No special licensing or industry-specific regulation applies to uniform retail. GST integration for invoicing is required and will be implemented as part of the order confirmation module.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 08 TIMELINE -->
+  <div class="section">
+    <div class="section-number">08 · Timeline</div>
+    <h1 class="section-title">Development Roadmap</h1>
+    <p class="section-lead">A phased delivery plan designed to get a working customer app and admin panel live within 4 months, with enhancements in subsequent phases.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-content">
+          <div class="phase-label">Phase 1 · Weeks 1–3</div>
+          <h3>Foundation — Architecture, DB & Design</h3>
+          <p>Database schema design, API architecture planning, UI/UX wireframes and design system creation, school and catalogue data model, and development environment setup.</p>
+          <div class="timeline-deliverables">
+            <span class="deliverable-tag">System Architecture</span>
+            <span class="deliverable-tag">DB Schema</span>
+            <span class="deliverable-tag">UI Wireframes</span>
+            <span class="deliverable-tag">Design System</span>
+            <span class="deliverable-tag">API Contracts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <div class="phase-label">Phase 2 · Weeks 4–7</div>
+          <h3>Core Backend — Catalogue, Sizing & Pricing</h3>
+          <p>School directory API, grade/gender catalogue service, measurement input validation, size recommendation logic, and pricing rule engine with admin configuration.</p>
+          <div class="timeline-deliverables">
+            <span class="deliverable-tag">School API</span>
+            <span class="deliverable-tag">Catalogue Service</span>
+            <span class="deliverable-tag">Sizing Engine</span>
+            <span class="deliverable-tag">Pricing Engine</span>
+            <span class="deliverable-tag">Admin Panel v1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <div class="phase-label">Phase 3 · Weeks 8–11</div>
+          <h3>Customer App — Ordering Flow & Payments</h3>
+          <p>Full customer-facing mobile app with school selection, grade/gender filter, measurement input, cart, checkout, payment gateway integration, and order confirmation.</p>
+          <div class="timeline-deliverables">
+            <span class="deliverable-tag">Customer App (iOS + Android)</span>
+            <span class="deliverable-tag">Cart & Checkout</span>
+            <span class="deliverable-tag">Razorpay Integration</span>
+            <span class="deliverable-tag">Order Confirmation</span>
+            <span class="deliverable-tag">Push Notifications</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-content">
+          <div class="phase-label">Phase 4 · Weeks 12–14</div>
+          <h3>Delivery Module, Tracking & Notifications</h3>
+          <p>Delivery option selection UI, urgent surcharge calculation, courier API integration (Shiprocket), pincode serviceability check, order tracking pipeline, and SMS/WhatsApp notifications.</p>
+          <div class="timeline-deliverables">
+            <span class="deliverable-tag">Delivery Selection UI</span>
+            <span class="deliverable-tag">Urgent Surcharge Logic</span>
+            <span class="deliverable-tag">Courier API</span>
+            <span class="deliverable-tag">Order Tracking</span>
+            <span class="deliverable-tag">SMS / WhatsApp Alerts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-content">
+          <div class="phase-label">Phase 5 · Weeks 15–17</div>
+          <h3>QA, Testing & Production Deployment</h3>
+          <p>End-to-end user flow testing across devices, admin panel QA, payment flow testing, courier API integration testing, performance testing, app store submissions, and production deployment.</p>
+          <div class="timeline-deliverables">
+            <span class="deliverable-tag">QA Reports</span>
+            <span class="deliverable-tag">App Store Submission</span>
+            <span class="deliverable-tag">Play Store Submission</span>
+            <span class="deliverable-tag">Production Deploy</span>
+            <span class="deliverable-tag">Staff Training</span>
+            <span class="deliverable-tag">User Manual</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Total Estimated Timeline: 15–17 Weeks (approximately 4 months)</strong> from kickoff to production launch. A working demo of the ordering flow (school selection → measurement → cart → checkout) can be demonstrated after Phase 3 (Week 11). App store review times (Apple: 1–3 days, Google: 1–7 days) are included in the Phase 5 estimate.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 09 RISKS -->
+  <div class="section">
+    <div class="section-number">09 · Risks</div>
+    <h1 class="section-title">Risk Assessment</h1>
+    <p class="section-lead">Key risks identified for this project with practical mitigation strategies for each.</p>
+
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div>
+          <h4>Incorrect Measurements by Parents</h4>
+          <p>Parents measuring at home without professional guidance may submit incorrect measurements, leading to ill-fitting uniforms and return/alteration requests.</p>
+          <p style="margin-top:6px;color:var(--success);font-size:13px;font-weight:500;">✓ Mitigation: In-app illustrated + video measurement guides, smart size recommendation engine, and a clear alteration/returns policy with one free alteration per order.</p>
+        </div>
+        <div class="risk-level">
+          <label>Risk</label>
+          <span class="badge badge-warning">Medium</span>
+        </div>
+      </div>
+
+      <div class="risk-item">
+        <div>
+          <h4>School Catalogue Data Accuracy</h4>
+          <p>If a school changes its uniform design, colours, or grade requirements, the catalogue could become outdated — causing incorrect orders and customer complaints.</p>
+          <p style="margin-top:6px;color:var(--success);font-size:13px;font-weight:500;">✓ Mitigation: Admin can update catalogues in real-time. Seasonal review process built into the operations workflow. Schools can be given a self-service portal to flag changes.</p>
+        </div>
+        <div class="risk-level">
+          <label>Risk</label>
+          <span class="badge badge-warning">Medium</span>
+        </div>
+      </div>
+
+      <div class="risk-item">
+        <div>
+          <h4>Urgent Delivery SLA Failure</h4>
+          <p>If production capacity is strained during peak season, urgent orders may not be fulfilled within the 2–3 day commitment, damaging customer trust.</p>
+          <p style="margin-top:6px;color:var(--success);font-size:13px;font-weight:500;">✓ Mitigation: Admin can toggle urgent delivery availability on/off based on capacity. The system will show realistic delivery dates rather than fixed promises. Overdue order alerts sent to admin automatically.</p>
+        </div>
+        <div class="risk-level">
+          <label>Risk</label>
+          <span class="badge badge-info">Low-Medium</span>
+        </div>
+      </div>
+
+      <div class="risk-item">
+        <div>
+          <h4>Peak Season Traffic Spike</h4>
+          <p>May–July school admissions create a predictable order surge. Under-provisioned infrastructure could slow or crash the app during peak demand.</p>
+          <p style="margin-top:6px;color:var(--success);font-size:13px;font-weight:500;">✓ Mitigation: Cloud auto-scaling configured. Load testing performed before admission season. CDN for static assets (product images). Database query optimization included in Phase 5.</p>
+        </div>
+        <div class="risk-level">
+          <label>Risk</label>
+          <span class="badge badge-info">Low</span>
+        </div>
+      </div>
+
+      <div class="risk-item">
+        <div>
+          <h4>App Store Approval Delays</h4>
+          <p>Apple App Store review can take 1–7 days and may require revisions, potentially delaying launch relative to a target date.</p>
+          <p style="margin-top:6px;color:var(--success);font-size:13px;font-weight:500;">✓ Mitigation: App store guidelines followed strictly from the start. Submission begins early in Phase 5. PWA (Progressive Web App) version available as fallback for iOS users if approval is delayed.</p>
+        </div>
+        <div class="risk-level">
+          <label>Risk</label>
+          <span class="badge badge-info">Low</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 10 NEXT STEPS -->
+  <div class="section">
+    <div class="section-number">10 · Next Steps</div>
+    <h1 class="section-title">How We Proceed</h1>
+    <p class="section-lead">A clear six-step path from proposal acceptance to project kickoff.</p>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Action</th>
+          <th>Owner</th>
+          <th>Timeline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. Proposal Review</td>
+          <td>Client reviews this proposal, raises any questions, confirms scope and platform preferences (iOS + Android, or one first)</td>
+          <td>Client</td>
+          <td>Week 0</td>
+        </tr>
+        <tr>
+          <td>2. School & Catalogue Workshop</td>
+          <td>Session to map out all schools to be supported at launch, uniform sets per grade, measurement fields, and pricing rules</td>
+          <td>Both</td>
+          <td>Week 0–1</td>
+        </tr>
+        <tr>
+          <td>3. SRS Document</td>
+          <td>Detailed Software Requirements Specification document covering all screens, flows, pricing logic, and admin features — shared for client sign-off</td>
+          <td>Dev Team</td>
+          <td>Week 1</td>
+        </tr>
+        <tr>
+          <td>4. UI/UX Design Preview</td>
+          <td>High-fidelity app screens shared for client review — school selection, sizing input, cart, and delivery selection screens previewed before development begins</td>
+          <td>Design Team</td>
+          <td>Week 2–3</td>
+        </tr>
+        <tr>
+          <td>5. Agreement & Kickoff</td>
+          <td>Development agreement signed, payment gateway merchant account registered, App Store & Play Store developer accounts confirmed</td>
+          <td>Both</td>
+          <td>Week 1–2</td>
+        </tr>
+        <tr>
+          <td>6. Development Begins</td>
+          <td>Phase 1 development kicks off. Weekly progress demo calls scheduled. Staging environment link shared for client testing from Phase 3 onward.</td>
+          <td>Dev Team</td>
+          <td>Week 2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>
+      <strong>School Uniform Clothing App — Technical Proposal v1.0</strong><br>
+      Confidential. Prepared for Client — April 2026
+    </div>
+    <div style="text-align:right;">
+      All specifications subject to finalization during requirements workshop.<br>
+      Final scope confirmed via SRS document sign-off.
+    </div>
+  </div>
+
+</div><!-- /document -->
+</body>
+</html>
